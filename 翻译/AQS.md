@@ -1,19 +1,24 @@
-Java.util.concurrentÍ¬²½Æ÷(Synchronizer)¿ò¼Ü
-ÕªÒª
-ÔÚJ2SE1.5µÄjava.util.concurrent°üÀï£¬ºÜ¶àÍ¬²½Æ÷(locks,barriersµÈ)µÄÊµÏÖ¶¼ÓÃµ½ÁËÒ»¸öÐ¡µÄ¿ò¼Ü£¬ËûÃÇ½¨Á¢ÔÚAbstractQueuedSynchronizerÀàÖ®ÉÏ¡£AQS¿ò¼ÜÌá¹©ÁËÒ»Ð©Í¨ÓÃµÄ»úÖÆ£¬Ïñ×Ô¶¯¹ÜÀíÍ¬²½×´Ì¬£¬Ïß³Ì×èÈû£¬Ïß³Ì½âËø£¬Ïß³ÌÅÅ¶Ó¡£ÕâÆªÂÛÎÄÃèÊöÁËAQS¿ò¼ÜµÄÀíÂÛ»ù´¡£¬Éè¼Æ£¬ÊµÏÖ£¬ÓÃ·¨ºÍÐÔÄÜ
-Àà±ðºÍÖ÷Ìâ
-²¢·¢±à³ÌÉè¼Æ£¬²¢ÐÐ±à³ÌÉè¼Æ
-Ò»°ãÓÃÓï
-Ëã·¨(Algorithms)£¬²âÁ¿(Measurement)£¬ÐÔÄÜ(Performance)£¬Éè¼Æ(Design)
-¹Ø¼ü×Ö
-Í¬²½(Synchronization)£¬Java
-1.	¼ò½é
-JavaµÄJ2SEµÄ1.5°æÒýÈëÁËjava.util.concurrent°ü¡£ËüÊÇÒ»Ð©ÖÐ¼¶²¢·¢Ö§³ÖµÄÀàµÄ¼¯ºÏ×ñÑ­JCP(Java Community Process)JSP166¡£ÕâÐ©×é¼þÊÇÒ»Ì×Í¬²½Æ÷---³éÏóÊý¾ÝÀàÐÍ(ADT)Àà¡£ËüÊµÏÖÁËÒ»¸öÄÚ²¿µÄÍ¬²½×´Ì¬(ÀýÈç±êÖ¾Ò»¸öËøÊÇËø×¡»òÕß½âËø)£¬¸üÐÂºÍ¼ì²é×´Ì¬µÄ²Ù×÷£¬ÒÔ¼°ÔÚ×´Ì¬ÐèÒªÊ±ÖÁÉÙÒ»¸ö»áÒýÆðÏß³Ì×èÈûµÄ·½·¨£¬µ±Ò»Ð©ÆäËûÏß³Ì¸Ä±äÍ¬²½×´Ì¬ÔÊÐíËüÖØÐÂ»Ö¸´µÄ·½·¨¡£²¢·¢°üÀï°üÀ¨¸÷ÖÖÐÎÊ½µÄÅÅËûËø(exclusion locks)£¬¶ÁÐ´Ëø(read-write locks)£¬ÐÅºÅÁ¿(semaphores)£¬Õ¤À¸(barriers)£¬futures£¬ÉõÖÁÖ¸Ê¾Æ÷(indicators)¼°¿ÉÏà»¥ÇÐ»»µÄ¶ÓÁÐ(handoff queues)¡£
-ÖÚËùÖÜÖª£¬¼¸ºõËùÓÐµÄÍ¬²½Æ÷¶¼¿ÉÒÔÊµÏÖÆäËûµÄ×é½¨¡£ÀýÈç£¬¿ÉÒÔÊ¹ÓÃÖØÈëËø(reentrant locks)½¨Á¢Ò»¸öÐÅºÅÁ¿(semaphores)£¬·´Ö®Ò²ÐÐ¡£È»¶øÕâÑù×öÍ¨³£×ã¹»¸´ÔÓ£¬¾­³£²»Áé»î¡£ÊÇÒ»¸ö¶þÁ÷µÄ¹¤³Ì¹Ûµã¡£
-2.	ÒªÇó
-3.	Éè¼ÆºÍÊµÏÖ
-4.	ÓÃÀý
-5.	ÐÔÄÜ
-6.	½áÂÛ
-7.	ÖÂÐ»
-8.	²Î¿¼
+Java.util.concurrentåŒæ­¥å™¨(Synchronizer)æ¡†æž¶
+
+æ‘˜è¦
+åœ¨J2SE1.5çš„java.util.concurrentåŒ…é‡Œï¼Œå¾ˆå¤šåŒæ­¥å™¨(locks,barriersç­‰)çš„å®žçŽ°éƒ½ç”¨åˆ°äº†ä¸€ä¸ªå°çš„æ¡†æž¶ï¼Œä»–ä»¬å»ºç«‹åœ¨AbstractQueuedSynchronizerç±»ä¹‹ä¸Šã€‚AQSæ¡†æž¶æä¾›äº†ä¸€äº›é€šç”¨çš„æœºåˆ¶ï¼Œåƒè‡ªåŠ¨ç®¡ç†åŒæ­¥çŠ¶æ€ï¼Œçº¿ç¨‹é˜»å¡žï¼Œçº¿ç¨‹è§£é”ï¼Œçº¿ç¨‹æŽ’é˜Ÿã€‚è¿™ç¯‡è®ºæ–‡æè¿°äº†AQSæ¡†æž¶çš„ç†è®ºåŸºç¡€ï¼Œè®¾è®¡ï¼Œå®žçŽ°ï¼Œç”¨æ³•å’Œæ€§èƒ½
+
+ç±»åˆ«å’Œä¸»é¢˜
+å¹¶å‘ç¼–ç¨‹è®¾è®¡ï¼Œå¹¶è¡Œç¼–ç¨‹è®¾è®¡
+
+ä¸€èˆ¬ç”¨è¯­
+ç®—æ³•(Algorithms)ï¼Œæµ‹é‡(Measurement)ï¼Œæ€§èƒ½(Performance)ï¼Œè®¾è®¡(Design)
+
+å…³é”®å­—
+åŒæ­¥(Synchronization)ï¼ŒJava
+
+1.	ç®€ä»‹
+Javaçš„J2SEçš„1.5ç‰ˆå¼•å…¥äº†java.util.concurrentåŒ…ã€‚å®ƒæ˜¯ä¸€äº›ä¸­çº§å¹¶å‘æ”¯æŒçš„ç±»çš„é›†åˆéµå¾ªJCP(Java Community Process)JSP166ã€‚è¿™äº›ç»„ä»¶æ˜¯ä¸€å¥—åŒæ­¥å™¨---æŠ½è±¡æ•°æ®ç±»åž‹(ADT)ç±»ã€‚å®ƒå®žçŽ°äº†ä¸€ä¸ªå†…éƒ¨çš„åŒæ­¥çŠ¶æ€(ä¾‹å¦‚æ ‡å¿—ä¸€ä¸ªé”æ˜¯é”ä½æˆ–è€…è§£é”)ï¼Œæ›´æ–°å’Œæ£€æŸ¥çŠ¶æ€çš„æ“ä½œï¼Œä»¥åŠåœ¨çŠ¶æ€éœ€è¦æ—¶è‡³å°‘ä¸€ä¸ªä¼šå¼•èµ·çº¿ç¨‹é˜»å¡žçš„æ–¹æ³•ï¼Œå½“ä¸€äº›å…¶ä»–çº¿ç¨‹æ”¹å˜åŒæ­¥çŠ¶æ€å…è®¸å®ƒé‡æ–°æ¢å¤çš„æ–¹æ³•ã€‚å¹¶å‘åŒ…é‡ŒåŒ…æ‹¬å„ç§å½¢å¼çš„æŽ’ä»–é”(exclusion locks)ï¼Œè¯»å†™é”(read-write locks)ï¼Œä¿¡å·é‡(semaphores)ï¼Œæ …æ (barriers)ï¼Œfuturesï¼Œç”šè‡³æŒ‡ç¤ºå™¨(indicators)åŠå¯ç›¸äº’åˆ‡æ¢çš„é˜Ÿåˆ—(handoff queues)ã€‚
+ä¼—æ‰€å‘¨çŸ¥ï¼Œå‡ ä¹Žæ‰€æœ‰çš„åŒæ­¥å™¨éƒ½å¯ä»¥å®žçŽ°å…¶ä»–çš„ç»„å»ºã€‚ä¾‹å¦‚ï¼Œå¯ä»¥ä½¿ç”¨é‡å…¥é”(reentrant locks)å»ºç«‹ä¸€ä¸ªä¿¡å·é‡(semaphores)ï¼Œåä¹‹ä¹Ÿè¡Œã€‚ç„¶è€Œè¿™æ ·åšé€šå¸¸è¶³å¤Ÿå¤æ‚ï¼Œç»å¸¸ä¸çµæ´»ã€‚æ˜¯ä¸€ä¸ªäºŒæµçš„å·¥ç¨‹è§‚ç‚¹ã€‚
+2.	è¦æ±‚
+3.	è®¾è®¡å’Œå®žçŽ°
+4.	ç”¨ä¾‹
+5.	æ€§èƒ½
+6.	ç»“è®º
+7.	è‡´è°¢
+8.	å‚è€ƒ
